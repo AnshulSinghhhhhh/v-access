@@ -1,0 +1,19 @@
+{
+  "name": "v-access-server",
+  "version": "1.0.0",
+  "description": "V-ACCESS backend API — Node.js 22+ built-ins only (node:crypto, node:http) plus the pg client for Postgres.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning src/app.js",
+    "dev": "node --no-warnings=ExperimentalWarning --watch src/app.js",
+    "test": "node --no-warnings=ExperimentalWarning --test \"tests/**/*.test.js\"",
+    "seed": "node --no-warnings=ExperimentalWarning src/db/seed.js",
+    "smoke-test": "node scripts/smoke-test.js"
+  },
+  "dependencies": {
+    "pg": "^8.23.0"
+  }
+}

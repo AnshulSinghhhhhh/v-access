@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Find My Class — V-ACCESS</title>
+<link rel="stylesheet" href="/css/tokens.css" />
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/components.css" />
+<link rel="stylesheet" href="/css/campus.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <nav class="app-nav" aria-label="Primary">
+    <div class="app-nav__brand"><span class="app-nav__mark">V·A</span> V-ACCESS</div>
+    <a class="app-nav__link" href="/dashboard.html">Dashboard</a>
+    <a class="app-nav__link" href="/timetable.html">Timetable Designer</a>
+    <a class="app-nav__link" href="/faculty.html">Faculty Review</a>
+    <a class="app-nav__link" href="/find-my-class.html" aria-current="page">Find My Class</a>
+    <a class="app-nav__link" href="/social.html">Social Page</a>
+    <a class="app-nav__link" href="/notes.html">Notes Hub</a>
+    <a class="app-nav__link" href="/admin.html" id="nav-admin-link" hidden>Admin</a>
+    <button class="app-nav__link" id="logout-btn" style="background:none;border:none;font:inherit;text-align:left;cursor:pointer;margin-top:auto">Log out</button>
+  </nav>
+
+  <main class="app-main" id="main">
+    <div class="app-main__header">
+      <div>
+        <h1>Find My Class</h1>
+        <p class="text-muted mt-0">Search a room code like "PRP 230", or browse by block.</p>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab-btn" id="tab-find" role="tab" aria-selected="true" aria-controls="panel-find">Find a room</button>
+      <button class="tab-btn" id="tab-manage" role="tab" aria-selected="false" aria-controls="panel-manage" hidden>Manage locations</button>
+    </div>
+
+    <section id="panel-find" role="tabpanel" aria-labelledby="tab-find">
+      <div class="live-map-card" id="live-map-card" hidden>
+        <h2 style="font-size: var(--text-md)">Getting to <span id="live-map-title"></span></h2>
+        <div class="live-map-frame-wrap">
+          <iframe id="live-map-iframe" title="Live map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="live-map-caption">
+          <span>Live map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors.</span>
+          <a id="live-map-larger-link" href="#" target="_blank" rel="noopener noreferrer">Open larger map &#8599;</a>
+        </div>
+        <div class="live-map-switcher" id="live-map-switcher" hidden></div>
+      </div>
+
+      <div class="search-card">
+        <div class="search-row">
+          <input type="text" id="search-input" placeholder="e.g. PRP 230, G45, or a block name" aria-label="Search for a room" />
+          <button class="btn btn-primary" id="search-btn">Search</button>
+        </div>
+        <div class="search-hint">Room codes follow the pattern PRP&nbsp;<span class="mono">[floor][room]</span> — e.g. "230" is floor 2, room 30. Ground floor uses "G", e.g. "G45".</div>
+      </div>
+
+      <div id="search-alert-region" role="alert"></div>
+      <div id="search-results"></div>
+
+      <div class="reference-card">
+        <img src="/images/prp-layout.png" alt="Aerial layout of the PRP building complex showing blocks A through E around the central canteen" />
+        <div class="reference-card__caption">
+          <span>PRP block layout — for orientation once you know which block you're headed to.</span>
+        </div>
+      </div>
+
+      <h2 style="font-size: var(--text-md)">Browse by block</h2>
+      <div class="block-grid" id="block-grid"></div>
+      <div id="block-detail" hidden>
+        <a href="#" class="back-link" id="back-to-blocks" style="display:inline-block;margin-bottom:var(--sp-4);font-size:var(--text-sm)">&larr; Back to all blocks</a>
+        <h3 id="block-detail-name"></h3>
+        <p class="text-muted mt-0" id="block-detail-description"></p>
+        <div class="card" id="block-detail-floors" style="padding:0"></div>
+      </div>
+    </section>
+
+    <section id="panel-manage" role="tabpanel" aria-labelledby="tab-manage" hidden>
+      <div id="manage-alert-region" role="alert"></div>
+
+      <div class="upload-card" style="border:1px solid var(--color-line);border-radius:var(--radius-lg);background:var(--color-surface);padding:var(--sp-5);margin-bottom:var(--sp-6)">
+        <h2 style="font-size: var(--text-md)">Add a new block/zone</h2>
+        <div class="field">
+          <label for="new-block-name">Name</label>
+          <input type="text" id="new-block-name" maxlength="120" placeholder="e.g. Block A" />
+        </div>
+        <div class="field">
+          <label for="new-block-description">Description (optional)</label>
+          <input type="text" id="new-block-description" maxlength="500" placeholder="e.g. Hexagonal cluster, entrance facing the canteen" />
+        </div>
+        <div class="upload-grid" style="margin-top:0">
+          <div class="field">
+            <label for="new-block-lat">Latitude (optional — only for a real outdoor point, e.g. a whole building)</label>
+            <input type="number" step="any" id="new-block-lat" placeholder="e.g. 12.971493" />
+          </div>
+          <div class="field">
+            <label for="new-block-lng">Longitude (optional)</label>
+            <input type="number" step="any" id="new-block-lng" placeholder="e.g. 79.166208" />
+          </div>
+        </div>
+        <button class="btn btn-primary" id="new-block-submit">Add block</button>
+      </div>
+
+      <div id="manage-loading" class="loading-row"><span class="spinner" aria-hidden="true"></span> Loading&hellip;</div>
+      <div id="manage-list"></div>
+    </section>
+  </main>
+</div>
+
+<dialog class="confirm-dialog" id="delete-block-dialog">
+  <h3>Delete this location?</h3>
+  <p class="text-muted">All of its floor ranges and directions will be deleted too. This can't be undone.</p>
+  <div class="confirm-dialog__actions">
+    <button class="btn btn-secondary" id="delete-block-cancel">Cancel</button>
+    <button class="btn btn-danger" id="delete-block-confirm">Delete</button>
+  </div>
+</dialog>
+
+<script type="module" src="/js/campus.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Faculty Review — V-ACCESS</title>
+<link rel="stylesheet" href="/css/tokens.css" />
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/components.css" />
+<link rel="stylesheet" href="/css/faculty.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <nav class="app-nav" aria-label="Primary">
+    <div class="app-nav__brand"><span class="app-nav__mark">V·A</span> V-ACCESS</div>
+    <a class="app-nav__link" href="/dashboard.html">Dashboard</a>
+    <a class="app-nav__link" href="/timetable.html">Timetable Designer</a>
+    <a class="app-nav__link" href="/faculty.html" aria-current="page">Faculty Review</a>
+    <a class="app-nav__link" href="/find-my-class.html">Find My Class</a>
+    <a class="app-nav__link" href="/social.html">Social Page</a>
+    <a class="app-nav__link" href="/notes.html">Notes Hub</a>
+    <a class="app-nav__link" href="/admin.html" id="nav-admin-link" hidden>Admin</a>
+    <button class="app-nav__link" id="logout-btn" style="background:none;border:none;font:inherit;text-align:left;cursor:pointer;margin-top:auto">Log out</button>
+  </nav>
+
+  <main class="app-main" id="main">
+    <div class="app-main__header">
+      <div>
+        <h1>Faculty Review</h1>
+        <p class="text-muted mt-0">Search faculty, read student ratings, and share your own experience.</p>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab-btn" id="tab-browse" role="tab" aria-selected="true" aria-controls="panel-browse">Browse</button>
+      <button class="tab-btn" id="tab-moderation" role="tab" aria-selected="false" aria-controls="panel-moderation" hidden>Moderation queue</button>
+    </div>
+
+    <section id="panel-browse" role="tabpanel" aria-labelledby="tab-browse">
+      <div id="browse-alert-region" role="alert"></div>
+
+      <!-- List view -->
+      <div id="list-view">
+        <div class="faculty-search">
+          <input type="search" id="search-input" placeholder="Search by name or department&hellip;" aria-label="Search faculty" />
+          <button class="btn btn-secondary" id="add-faculty-btn" type="button">+ Add faculty</button>
+        </div>
+        <div id="faculty-loading" class="loading-row"><span class="spinner" aria-hidden="true"></span> Loading faculty&hellip;</div>
+        <div id="faculty-list"></div>
+      </div>
+
+      <!-- Detail view -->
+      <div id="detail-view" hidden>
+        <a href="#" class="back-link" id="back-to-list">&larr; Back to all faculty</a>
+        <div id="detail-content"></div>
+      </div>
+    </section>
+
+    <section id="panel-moderation" role="tabpanel" aria-labelledby="tab-moderation" hidden>
+      <div id="moderation-alert-region" role="alert"></div>
+      <div id="moderation-loading" class="loading-row" hidden><span class="spinner" aria-hidden="true"></span> Loading&hellip;</div>
+      <div id="moderation-list"></div>
+    </section>
+  </main>
+</div>
+
+<dialog class="confirm-dialog" id="add-faculty-dialog">
+  <h3>Add a faculty member</h3>
+  <p class="text-muted mt-0" style="font-size: var(--text-sm)">Not finding who you're looking for? Add them so you and others can leave a review.</p>
+  <div id="add-faculty-alert-region" role="alert"></div>
+  <div class="field">
+    <label for="add-faculty-name">Full name</label>
+    <input type="text" id="add-faculty-name" maxlength="120" placeholder="e.g. Dr. Ananya Raghunathan" style="width:100%;padding:var(--sp-3);border:1px solid var(--color-line);border-radius:var(--radius-md);font-family:var(--font-ui)" />
+  </div>
+  <div class="field">
+    <label for="add-faculty-department">Department</label>
+    <input type="text" id="add-faculty-department" maxlength="120" placeholder="e.g. School of Computer Science" style="width:100%;padding:var(--sp-3);border:1px solid var(--color-line);border-radius:var(--radius-md);font-family:var(--font-ui)" />
+  </div>
+  <div class="field">
+    <label for="add-faculty-designation">Designation <span class="text-muted">(optional)</span></label>
+    <input type="text" id="add-faculty-designation" maxlength="120" placeholder="e.g. Associate Professor" style="width:100%;padding:var(--sp-3);border:1px solid var(--color-line);border-radius:var(--radius-md);font-family:var(--font-ui)" />
+  </div>
+  <div class="confirm-dialog__actions">
+    <button class="btn btn-secondary" id="add-faculty-cancel" type="button">Cancel</button>
+    <button class="btn btn-primary" id="add-faculty-submit" type="button">Add &amp; write a review</button>
+  </div>
+</dialog>
+
+<script type="module" src="/js/faculty.js"></script>
+</body>
+</html>

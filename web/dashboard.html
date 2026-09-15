@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — V-ACCESS</title>
+<link rel="stylesheet" href="/css/tokens.css" />
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/components.css" />
+<link rel="stylesheet" href="/css/faculty.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <nav class="app-nav" aria-label="Primary">
+    <div class="app-nav__brand"><span class="app-nav__mark">V·A</span> V-ACCESS</div>
+    <a class="app-nav__link" href="/dashboard.html" aria-current="page">Dashboard</a>
+    <a class="app-nav__link" href="/timetable.html">Timetable Designer</a>
+    <a class="app-nav__link" href="/faculty.html">Faculty Review</a>
+    <a class="app-nav__link" href="/find-my-class.html">Find My Class</a>
+    <a class="app-nav__link" href="/social.html">Social Page</a>
+    <a class="app-nav__link" href="/notes.html">Notes Hub</a>
+    <a class="app-nav__link" href="/admin.html" id="nav-admin-link" hidden>Admin</a>
+    <button class="app-nav__link" id="logout-btn" style="background:none;border:none;font:inherit;text-align:left;cursor:pointer;margin-top:auto">Log out</button>
+  </nav>
+
+  <main class="app-main" id="main">
+    <div class="app-main__header">
+      <div>
+        <h1 id="greeting">Dashboard</h1>
+        <p class="text-muted" id="subgreeting">&nbsp;</p>
+      </div>
+    </div>
+
+    <div id="loading" class="loading-row"><span class="spinner" aria-hidden="true"></span> Loading your dashboard&hellip;</div>
+    <div id="content" hidden>
+      <section aria-labelledby="stats-heading" style="margin-bottom: var(--sp-6)">
+        <h2 id="stats-heading" class="visually-hidden">Your activity</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))">
+          <div class="stat-plate">
+            <span class="stat-plate__value mono" id="stat-timetables">0</span>
+            <span class="stat-plate__label">Saved timetables</span>
+          </div>
+          <div class="stat-plate">
+            <span class="stat-plate__value mono" id="stat-notes">0</span>
+            <span class="stat-plate__label">Notes uploaded</span>
+          </div>
+          <div class="stat-plate">
+            <span class="stat-plate__value mono" id="stat-reviews">0</span>
+            <span class="stat-plate__label">Faculty reviews</span>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="top-faculty-heading" style="margin-bottom: var(--sp-6)">
+        <h2 id="top-faculty-heading">Top-rated faculty</h2>
+        <div id="top-faculty-list"></div>
+      </section>
+
+      <section aria-labelledby="modules-heading">
+        <h2 id="modules-heading">Modules</h2>
+        <div class="grid">
+          <a class="card card-link" href="/timetable.html">
+            <div class="card__icon" aria-hidden="true">TT</div>
+            <div class="card__title">Timetable Designer</div>
+            <p class="card__desc">Build and compare conflict-free schedules.</p>
+            <span class="badge badge-success" style="margin-top: var(--sp-3)">Available</span>
+          </a>
+          <a class="card card-link" href="/faculty.html">
+            <div class="card__icon" aria-hidden="true">FR</div>
+            <div class="card__title">Faculty Review</div>
+            <p class="card__desc">Search faculty and read student ratings.</p>
+            <span class="badge badge-success" style="margin-top: var(--sp-3)">Available</span>
+          </a>
+          <a class="card card-link" href="/find-my-class.html">
+            <div class="card__icon" aria-hidden="true">FC</div>
+            <div class="card__title">Find My Class</div>
+            <p class="card__desc">Locate classrooms, labs, and blocks on the map.</p>
+            <span class="badge badge-success" style="margin-top: var(--sp-3)">Available</span>
+          </a>
+          <a class="card card-link" href="/social.html">
+            <div class="card__icon" aria-hidden="true">SP</div>
+            <div class="card__title">Social Page</div>
+            <p class="card__desc">Posts, announcements, and events from students.</p>
+            <span class="badge badge-success" style="margin-top: var(--sp-3)">Available</span>
+          </a>
+          <a class="card card-link" href="/notes.html">
+            <div class="card__icon" aria-hidden="true">NH</div>
+            <div class="card__title">Notes Hub</div>
+            <p class="card__desc">Share and download academic resources.</p>
+            <span class="badge badge-success" style="margin-top: var(--sp-3)">Available</span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

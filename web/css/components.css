@@ -1,0 +1,237 @@
+/* Buttons */
+.btn {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  padding: var(--sp-3) var(--sp-4);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  transition: background-color 120ms ease, border-color 120ms ease, opacity 120ms ease;
+}
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-primary { background: var(--color-accent); color: var(--color-accent-ink); }
+.btn-primary:hover:not(:disabled) { background: #1a41b5; }
+.btn-secondary { background: var(--color-surface); border-color: var(--color-line); color: var(--color-ink); }
+.btn-secondary:hover:not(:disabled) { background: var(--color-paper); }
+.btn-danger { background: var(--color-danger-soft); color: var(--color-danger); border-color: transparent; }
+.btn-danger:hover:not(:disabled) { background: #f5d7d7; }
+.btn-block { width: 100%; }
+.btn-sm { padding: var(--sp-2) var(--sp-3); font-size: var(--text-xs); }
+
+/* Forms */
+.field { margin-bottom: var(--sp-4); }
+.field label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  margin-bottom: var(--sp-2);
+  color: var(--color-ink);
+}
+.field .hint { font-size: var(--text-xs); color: var(--color-ink-muted); margin-top: var(--sp-1); }
+.field input, .field select, .field textarea {
+  width: 100%;
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  padding: var(--sp-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: var(--focus-ring);
+}
+.field.has-error input { border-color: var(--color-danger); }
+.field-error {
+  color: var(--color-danger);
+  font-size: var(--text-xs);
+  margin-top: var(--sp-1);
+  font-weight: 500;
+}
+.otp-input input {
+  font-family: var(--font-mono);
+  letter-spacing: 0.4em;
+  font-size: var(--text-lg);
+  text-align: center;
+}
+
+/* Auth card layout */
+.auth-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-5);
+}
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-card);
+}
+.auth-card__mark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: var(--sp-1) var(--sp-2);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--sp-4);
+}
+.auth-card__foot {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--color-line);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  text-align: center;
+}
+
+/* Alerts */
+.alert {
+  border-radius: var(--radius-md);
+  padding: var(--sp-3) var(--sp-4);
+  font-size: var(--text-sm);
+  margin-bottom: var(--sp-4);
+  display: flex;
+  gap: var(--sp-2);
+  align-items: flex-start;
+}
+.alert-error { background: var(--color-danger-soft); color: var(--color-danger); }
+.alert-success { background: var(--color-success-soft); color: var(--color-success); }
+.alert-info { background: var(--color-accent-soft); color: var(--color-accent); }
+
+/* Cards / grid */
+.grid {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  box-shadow: var(--shadow-card);
+}
+.card-link {
+  display: block;
+  color: inherit;
+}
+.card-link:hover {
+  text-decoration: none;
+  border-color: var(--color-accent);
+}
+.card__icon {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  margin-bottom: var(--sp-3);
+}
+.card__title { font-weight: 600; margin-bottom: var(--sp-1); font-size: var(--text-md); }
+.card__desc { color: var(--color-ink-muted); font-size: var(--text-sm); margin: 0; }
+
+/* Stat plates — signage-style badges for numbers */
+.stat-plate {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.stat-plate__value {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+.stat-plate__label {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+.badge-warn { background: var(--color-warn-soft); color: var(--color-warn); }
+.badge-success { background: var(--color-success-soft); color: var(--color-success); }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: var(--sp-8) var(--sp-5);
+  color: var(--color-ink-muted);
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-lg);
+}
+.empty-state h3 { color: var(--color-ink); }
+
+/* Loading spinner */
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid var(--color-line);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; border-top-color: var(--color-line); }
+}
+
+.loading-row {
+  display: flex; align-items: center; gap: var(--sp-2);
+  color: var(--color-ink-muted); font-size: var(--text-sm);
+  padding: var(--sp-4) 0;
+}
+.loading-row[hidden] {
+  /* The base rule above sets its own `display`, which otherwise beats the
+     browser's built-in `[hidden] { display: none }` rule regardless of the
+     `hidden` attribute — so JS setting `.hidden = true` had no visible
+     effect and the spinner kept showing even after data loaded. */
+  display: none;
+}
+
+/* Confirmation dialog */
+dialog.confirm-dialog {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  max-width: 360px;
+  box-shadow: var(--shadow-raised);
+}
+dialog.confirm-dialog::backdrop { background: rgba(20, 23, 28, 0.4); }
+.confirm-dialog__actions { display: flex; gap: var(--sp-2); justify-content: flex-end; margin-top: var(--sp-5); }
+
+.text-muted { color: var(--color-ink-muted); }
+.mt-0 { margin-top: 0; }

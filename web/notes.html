@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Notes Hub — V-ACCESS</title>
+<link rel="stylesheet" href="/css/tokens.css" />
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/components.css" />
+<link rel="stylesheet" href="/css/notes.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <nav class="app-nav" aria-label="Primary">
+    <div class="app-nav__brand"><span class="app-nav__mark">V·A</span> V-ACCESS</div>
+    <a class="app-nav__link" href="/dashboard.html">Dashboard</a>
+    <a class="app-nav__link" href="/timetable.html">Timetable Designer</a>
+    <a class="app-nav__link" href="/faculty.html">Faculty Review</a>
+    <a class="app-nav__link" href="/find-my-class.html">Find My Class</a>
+    <a class="app-nav__link" href="/social.html">Social Page</a>
+    <a class="app-nav__link" href="/notes.html" aria-current="page">Notes Hub</a>
+    <a class="app-nav__link" href="/admin.html" id="nav-admin-link" hidden>Admin</a>
+    <button class="app-nav__link" id="logout-btn" style="background:none;border:none;font:inherit;text-align:left;cursor:pointer;margin-top:auto">Log out</button>
+  </nav>
+
+  <main class="app-main" id="main">
+    <div class="app-main__header">
+      <div>
+        <h1>Notes Hub</h1>
+        <p class="text-muted mt-0">Share and download academic resources — PDF, DOC/DOCX, PPT/PPTX.</p>
+      </div>
+    </div>
+
+    <div id="page-alert-region" role="alert"></div>
+
+    <div class="upload-card">
+      <h2 style="font-size: var(--text-md)">Upload notes</h2>
+      <div class="upload-grid">
+        <div class="field">
+          <label for="upload-subject">Subject</label>
+          <input type="text" id="upload-subject" maxlength="120" placeholder="e.g. Data Structures" />
+        </div>
+        <div class="field">
+          <label for="upload-faculty">Faculty (optional)</label>
+          <select id="upload-faculty">
+            <option value="">— None —</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" style="margin-top: var(--sp-2)">
+        <label>File</label>
+        <label class="file-drop" id="file-drop-label" for="upload-file-input">
+          <input type="file" id="upload-file-input" accept=".pdf,.doc,.docx,.ppt,.pptx" style="display:none" />
+          <span id="file-drop-text">Click to choose a PDF, DOC/DOCX, or PPT/PPTX file</span>
+        </label>
+      </div>
+      <button class="btn btn-primary" id="upload-submit" style="margin-top: var(--sp-3)">Upload</button>
+    </div>
+
+    <div class="filter-bar">
+      <input type="search" id="filter-search" placeholder="Search by filename&hellip;" aria-label="Search notes by filename" />
+      <select id="filter-subject" aria-label="Filter by subject">
+        <option value="">All subjects</option>
+      </select>
+      <select id="filter-faculty" aria-label="Filter by faculty">
+        <option value="">All faculty</option>
+      </select>
+    </div>
+
+    <div id="notes-loading" class="loading-row"><span class="spinner" aria-hidden="true"></span> Loading notes&hellip;</div>
+    <div id="notes-list"></div>
+  </main>
+</div>
+
+<dialog class="confirm-dialog" id="delete-note-dialog">
+  <h3>Remove this file?</h3>
+  <p class="text-muted">This can't be undone.</p>
+  <div class="confirm-dialog__actions">
+    <button class="btn btn-secondary" id="delete-note-cancel">Cancel</button>
+    <button class="btn btn-danger" id="delete-note-confirm">Remove</button>
+  </div>
+</dialog>
+
+<script type="module" src="/js/notes.js"></script>
+</body>
+</html>

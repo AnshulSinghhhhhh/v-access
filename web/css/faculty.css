@@ -1,0 +1,68 @@
+.rating-stars {
+  font-family: var(--font-mono);
+  color: var(--color-warn);
+  letter-spacing: 1px;
+}
+.rating-stars .empty { color: var(--color-line); }
+
+.faculty-search {
+  display: flex;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-5);
+}
+.faculty-search input { flex: 1; }
+
+.faculty-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  margin-bottom: var(--sp-3);
+  cursor: pointer;
+}
+.faculty-list-item:hover { border-color: var(--color-accent); }
+.faculty-list-item__name { font-weight: 600; }
+.faculty-list-item__dept { color: var(--color-ink-muted); font-size: var(--text-sm); }
+.faculty-list-item__rating { text-align: right; white-space: nowrap; }
+.faculty-list-item__count { font-size: var(--text-xs); color: var(--color-ink-muted); }
+
+.review-card {
+  border-bottom: 1px solid var(--color-line);
+  padding: var(--sp-4) 0;
+}
+.review-card:last-child { border-bottom: none; }
+.review-card__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-1); }
+.review-card__author { font-weight: 600; font-size: var(--text-sm); }
+.review-card__date { font-size: var(--text-xs); color: var(--color-ink-muted); }
+
+.rating-picker { display: flex; gap: var(--sp-2); }
+.rating-picker button {
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  width: 40px; height: 40px;
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  cursor: pointer;
+}
+.rating-picker button[aria-pressed="true"] {
+  background: var(--color-warn-soft);
+  border-color: var(--color-warn);
+  color: var(--color-warn);
+}
+
+.back-link { display: inline-block; margin-bottom: var(--sp-4); font-size: var(--text-sm); }
+
+.moderation-row {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-4);
+  margin-bottom: var(--sp-3);
+  background: var(--color-surface);
+}
+.moderation-row__meta { font-size: var(--text-xs); color: var(--color-ink-muted); margin-bottom: var(--sp-2); }
+.moderation-row__actions { display: flex; gap: var(--sp-2); margin-top: var(--sp-3); }

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Timetable Designer — V-ACCESS</title>
+<link rel="stylesheet" href="/css/tokens.css" />
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/components.css" />
+<link rel="stylesheet" href="/css/timetable.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <nav class="app-nav" aria-label="Primary">
+    <div class="app-nav__brand"><span class="app-nav__mark">V·A</span> V-ACCESS</div>
+    <a class="app-nav__link" href="/dashboard.html">Dashboard</a>
+    <a class="app-nav__link" href="/timetable.html" aria-current="page">Timetable Designer</a>
+    <a class="app-nav__link" href="/faculty.html">Faculty Review</a>
+    <a class="app-nav__link" href="/find-my-class.html">Find My Class</a>
+    <a class="app-nav__link" href="/social.html">Social Page</a>
+    <a class="app-nav__link" href="/notes.html">Notes Hub</a>
+    <a class="app-nav__link" href="/admin.html" id="nav-admin-link" hidden>Admin</a>
+    <button class="app-nav__link" id="logout-btn" style="background:none;border:none;font:inherit;text-align:left;cursor:pointer;margin-top:auto">Log out</button>
+  </nav>
+
+  <main class="app-main" id="main">
+    <div class="app-main__header">
+      <div>
+        <h1>Timetable Designer</h1>
+        <p class="text-muted mt-0">Pick courses and acceptable slots, then generate every conflict-free combination.</p>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab-btn" id="tab-build" role="tab" aria-selected="true" aria-controls="panel-build">Build</button>
+      <button class="tab-btn" id="tab-saved" role="tab" aria-selected="false" aria-controls="panel-saved">Saved timetables</button>
+    </div>
+
+    <!-- BUILD PANEL -->
+    <section id="panel-build" role="tabpanel" aria-labelledby="tab-build">
+      <div id="build-alert-region" role="alert"></div>
+
+      <h2 style="font-size: var(--text-md)">1. Choose courses and acceptable slots</h2>
+      <div id="course-loading" class="loading-row"><span class="spinner" aria-hidden="true"></span> Loading courses&hellip;</div>
+      <div id="course-picker" class="course-picker" hidden></div>
+
+      <h2 style="font-size: var(--text-md); margin-top: var(--sp-6)">2. Preferences (optional)</h2>
+      <div class="preferences-row">
+        <div class="field" style="min-width:auto">
+          <label style="display:flex;align-items:center;gap:var(--sp-2);font-weight:500">
+            <input type="checkbox" id="pref-no-8am" style="width:auto" />
+            No 8 AM classes
+          </label>
+        </div>
+        <div class="field">
+          <label>Preferred days</label>
+          <div class="day-toggle-group" id="day-toggle-group">
+            <button type="button" class="day-toggle" data-day="1" aria-pressed="false">Mon</button>
+            <button type="button" class="day-toggle" data-day="2" aria-pressed="false">Tue</button>
+            <button type="button" class="day-toggle" data-day="3" aria-pressed="false">Wed</button>
+            <button type="button" class="day-toggle" data-day="4" aria-pressed="false">Thu</button>
+            <button type="button" class="day-toggle" data-day="5" aria-pressed="false">Fri</button>
+            <button type="button" class="day-toggle" data-day="6" aria-pressed="false">Sat</button>
+          </div>
+          <div class="hint">Leave all unselected to allow any day.</div>
+        </div>
+        <div class="field">
+          <label for="pref-earliest">Earliest start</label>
+          <input type="time" id="pref-earliest" />
+        </div>
+        <div class="field">
+          <label for="pref-latest">Latest end</label>
+          <input type="time" id="pref-latest" />
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="generate-btn">
+        <span class="btn-label">Generate timetables</span>
+      </button>
+
+      <div id="results-region" style="margin-top: var(--sp-6)"></div>
+    </section>
+
+    <!-- SAVED PANEL -->
+    <section id="panel-saved" role="tabpanel" aria-labelledby="tab-saved" hidden>
+      <div id="saved-alert-region" role="alert"></div>
+      <div id="saved-loading" class="loading-row" hidden><span class="spinner" aria-hidden="true"></span> Loading&hellip;</div>
+      <div id="saved-list"></div>
+    </section>
+  </main>
+</div>
+
+<dialog class="confirm-dialog" id="save-dialog">
+  <h3>Save this timetable</h3>
+  <div class="field">
+    <label for="save-name-input">Name</label>
+    <input type="text" id="save-name-input" maxlength="100" placeholder="e.g. Semester 5 — plan A" />
+  </div>
+  <div class="confirm-dialog__actions">
+    <button class="btn btn-secondary" id="save-dialog-cancel">Cancel</button>
+    <button class="btn btn-primary" id="save-dialog-confirm">Save</button>
+  </div>
+</dialog>
+
+<dialog class="confirm-dialog" id="delete-dialog">
+  <h3>Delete this timetable?</h3>
+  <p class="text-muted">This can't be undone.</p>
+  <div class="confirm-dialog__actions">
+    <button class="btn btn-secondary" id="delete-dialog-cancel">Cancel</button>
+    <button class="btn btn-danger" id="delete-dialog-confirm">Delete</button>
+  </div>
+</dialog>
+
+<script type="module" src="/js/timetable.js"></script>
+</body>
+</html>

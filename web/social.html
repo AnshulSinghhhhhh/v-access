@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Social Page — V-ACCESS</title>
+<link rel="stylesheet" href="/css/tokens.css" />
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/components.css" />
+<link rel="stylesheet" href="/css/social.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <nav class="app-nav" aria-label="Primary">
+    <div class="app-nav__brand"><span class="app-nav__mark">V·A</span> V-ACCESS</div>
+    <a class="app-nav__link" href="/dashboard.html">Dashboard</a>
+    <a class="app-nav__link" href="/timetable.html">Timetable Designer</a>
+    <a class="app-nav__link" href="/faculty.html">Faculty Review</a>
+    <a class="app-nav__link" href="/find-my-class.html">Find My Class</a>
+    <a class="app-nav__link" href="/social.html" aria-current="page">Social Page</a>
+    <a class="app-nav__link" href="/notes.html">Notes Hub</a>
+    <a class="app-nav__link" href="/admin.html" id="nav-admin-link" hidden>Admin</a>
+    <button class="app-nav__link" id="logout-btn" style="background:none;border:none;font:inherit;text-align:left;cursor:pointer;margin-top:auto">Log out</button>
+  </nav>
+
+  <main class="app-main" id="main" style="max-width: 680px">
+    <div class="app-main__header">
+      <div>
+        <h1>Social Page</h1>
+        <p class="text-muted mt-0">Announcements, events, and updates from students.</p>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab-btn" id="tab-feed" role="tab" aria-selected="true" aria-controls="panel-feed">Feed</button>
+      <button class="tab-btn" id="tab-moderation" role="tab" aria-selected="false" aria-controls="panel-moderation" hidden>Reported posts</button>
+    </div>
+
+    <section id="panel-feed" role="tabpanel" aria-labelledby="tab-feed">
+      <div id="feed-alert-region" role="alert"></div>
+
+      <div class="composer">
+        <div class="composer__row">
+          <div class="avatar" id="composer-avatar">?</div>
+          <textarea id="composer-text" maxlength="3000" placeholder="Share an announcement, event, or update&hellip;"></textarea>
+        </div>
+        <div id="composer-media-preview" class="composer__media-preview" hidden>
+          <img id="composer-image-img" alt="Attached image preview" hidden />
+          <video id="composer-video-preview" muted playsinline hidden></video>
+          <button type="button" id="composer-media-remove" aria-label="Remove attachment">&times;</button>
+        </div>
+        <div class="composer__footer">
+          <div class="composer__attach-row">
+            <label class="attach-btn">
+              <input type="file" id="composer-file-input" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" />
+              🖼️ Photo
+            </label>
+            <label class="attach-btn">
+              <input type="file" id="composer-video-input" accept="video/mp4,video/webm,video/ogg" style="display:none" />
+              🎬 Video
+            </label>
+          </div>
+          <button class="btn btn-primary btn-sm" id="composer-submit">Post</button>
+        </div>
+      </div>
+
+      <div id="feed-loading" class="loading-row"><span class="spinner" aria-hidden="true"></span> Loading feed&hellip;</div>
+      <div id="feed-list"></div>
+      <div class="load-more-row" id="load-more-row" hidden>
+        <button class="btn btn-secondary btn-sm" id="load-more-btn">Load more</button>
+      </div>
+    </section>
+
+    <section id="panel-moderation" role="tabpanel" aria-labelledby="tab-moderation" hidden>
+      <div id="moderation-alert-region" role="alert"></div>
+      <div id="moderation-loading" class="loading-row" hidden><span class="spinner" aria-hidden="true"></span> Loading&hellip;</div>
+      <div id="moderation-list"></div>
+    </section>
+  </main>
+</div>
+
+<dialog class="confirm-dialog" id="report-dialog">
+  <h3>Report this post</h3>
+  <div class="field">
+    <label for="report-reason-input">Reason</label>
+    <textarea id="report-reason-input" rows="3" maxlength="300" placeholder="What's wrong with this post?" style="width:100%;padding:var(--sp-3);border:1px solid var(--color-line);border-radius:var(--radius-md);font-family:var(--font-ui)"></textarea>
+  </div>
+  <div class="confirm-dialog__actions">
+    <button class="btn btn-secondary" id="report-dialog-cancel">Cancel</button>
+    <button class="btn btn-primary" id="report-dialog-confirm">Submit report</button>
+  </div>
+</dialog>
+
+<script type="module" src="/js/social.js"></script>
+</body>
+</html>

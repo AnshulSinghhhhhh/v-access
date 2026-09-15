@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Dashboard — V-ACCESS</title>
+<link rel="stylesheet" href="/css/tokens.css" />
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/components.css" />
+<link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <nav class="app-nav" aria-label="Primary">
+    <div class="app-nav__brand"><span class="app-nav__mark">V·A</span> V-ACCESS</div>
+    <a class="app-nav__link" href="/dashboard.html">Dashboard</a>
+    <a class="app-nav__link" href="/timetable.html">Timetable Designer</a>
+    <a class="app-nav__link" href="/faculty.html">Faculty Review</a>
+    <a class="app-nav__link" href="/find-my-class.html">Find My Class</a>
+    <a class="app-nav__link" href="/social.html">Social Page</a>
+    <a class="app-nav__link" href="/notes.html">Notes Hub</a>
+    <a class="app-nav__link" href="/admin.html" id="nav-admin-link" aria-current="page">Admin</a>
+    <button class="app-nav__link" id="logout-btn" style="background:none;border:none;font:inherit;text-align:left;cursor:pointer;margin-top:auto">Log out</button>
+  </nav>
+
+  <main class="app-main" id="main">
+    <div class="app-main__header">
+      <div>
+        <h1>Admin Dashboard</h1>
+        <p class="text-muted mt-0">Cross-module statistics, user management, and the audit log.</p>
+      </div>
+    </div>
+
+    <div id="access-check" class="loading-row"><span class="spinner" aria-hidden="true"></span> Checking access&hellip;</div>
+
+    <div id="admin-content" hidden>
+      <div class="tabs" role="tablist">
+        <button class="tab-btn" id="tab-overview" role="tab" aria-selected="true" aria-controls="panel-overview">Overview</button>
+        <button class="tab-btn" id="tab-users" role="tab" aria-selected="false" aria-controls="panel-users">Users</button>
+        <button class="tab-btn" id="tab-audit" role="tab" aria-selected="false" aria-controls="panel-audit">Audit log</button>
+      </div>
+
+      <section id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+        <div id="overview-alert-region" role="alert"></div>
+        <div id="stats-loading" class="loading-row"><span class="spinner" aria-hidden="true"></span> Loading statistics&hellip;</div>
+        <div class="stat-grid" id="stat-grid" hidden></div>
+
+        <h2 style="font-size: var(--text-md)">Moderation queues</h2>
+        <p class="text-muted">Reviewing and removing content happens in each module, alongside the content itself.</p>
+        <div class="shortcut-row">
+          <a class="btn btn-secondary" href="/faculty.html">Faculty review moderation &rarr;</a>
+          <a class="btn btn-secondary" href="/social.html">Social Page reports &rarr;</a>
+          <a class="btn btn-secondary" href="/notes.html">Notes Hub management &rarr;</a>
+        </div>
+      </section>
+
+      <section id="panel-users" role="tabpanel" aria-labelledby="tab-users" hidden>
+        <div id="users-alert-region" role="alert"></div>
+        <div class="filter-bar" style="display:flex;gap:var(--sp-3);margin-bottom:var(--sp-5);flex-wrap:wrap">
+          <input type="search" id="user-search" placeholder="Search by name or email&hellip;" style="flex:1;min-width:200px;padding:var(--sp-2) var(--sp-3);border:1px solid var(--color-line);border-radius:var(--radius-md)" />
+          <select id="user-role-filter" style="padding:var(--sp-2) var(--sp-3);border:1px solid var(--color-line);border-radius:var(--radius-md)">
+            <option value="">All roles</option>
+            <option value="student">Students</option>
+            <option value="admin">Admins</option>
+          </select>
+        </div>
+        <div id="users-loading" class="loading-row" hidden><span class="spinner" aria-hidden="true"></span> Loading&hellip;</div>
+        <div id="users-list"></div>
+      </section>
+
+      <section id="panel-audit" role="tabpanel" aria-labelledby="tab-audit" hidden>
+        <div id="audit-alert-region" role="alert"></div>
+        <div id="audit-loading" class="loading-row" hidden><span class="spinner" aria-hidden="true"></span> Loading&hellip;</div>
+        <div id="audit-list"></div>
+        <div class="load-more-row" id="audit-load-more-row" hidden style="text-align:center;margin:var(--sp-5) 0">
+          <button class="btn btn-secondary btn-sm" id="audit-load-more-btn">Load more</button>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<dialog class="confirm-dialog" id="suspend-dialog">
+  <h3 id="suspend-dialog-title">Suspend this user?</h3>
+  <p class="text-muted" id="suspend-dialog-body">They will be logged out immediately and unable to log back in until reactivated.</p>
+  <div class="confirm-dialog__actions">
+    <button class="btn btn-secondary" id="suspend-dialog-cancel">Cancel</button>
+    <button class="btn btn-danger" id="suspend-dialog-confirm">Confirm</button>
+  </div>
+</dialog>
+
+<script type="module" src="/js/admin.js"></script>
+</body>
+</html>

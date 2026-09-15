@@ -1,0 +1,59 @@
+import { api } from '/js/api.js';
+
+const form = document.getElementById('register-form');
+const alertRegion = document.getElementById('alert-region');
+const submitBtn = document.getElementById('submit-btn');
+
+function showAlert(message, kind = 'error') {
+  alertRegion.innerHTML = `<div class="alert alert-${kind}">${escapeHtml(message)}</div>`;
+}
+function clearFieldErrors() {
+  document.querySelectorAll('.field').forEach((f) => {
+    f.classList.remove('has-error');
+    f.querySelector('.field-error').hidden = true;
+  });
+}
+function showFieldError(field, message) {
+  const el = document.getElementById(`field-${field}`);
+  if (!el) return;
+  el.classList.add('has-error');
+  const err = el.querySelector('.field-error');
+  err.textContent = message;
+  err.hidden = false;
+}
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+function setLoading(loading) {
+  submitBtn.disabled = loading;
+  submitBtn.querySelector('.btn-label').innerHTML = loading
+    ? '<span class="spinner" aria-hidden="true"></span> Creating account\u2026'
+    : 'Create account';
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  alertRegion.innerHTML = '';
+  clearFieldErrors();
+
+  const fullName = document.getElementById('fullName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  if (!fullName) return showFieldError('fullName', 'Enter your full name.');
+  if (!email) return showFieldError('email', 'Enter your VIT email.');
+  if (!password) return showFieldError('password', 'Choose a password.');
+
+  setLoading(true);
+  try {
+    await api('/api/auth/register', { method: 'POST', body: { fullName, email, password } });
+    window.location.href = `/verify.html?email=${encodeURIComponent(email)}`;
+  } catch (err) {
+    if (err.field) showFieldError(err.field, err.message);
+    else showAlert(err.message);
+  } finally {
+    setLoading(false);
+  }
+});

@@ -1,13 +1,32 @@
 const TOKEN_KEY = 'vaccess_token';
+const ROLE_KEY = 'vaccess_role';
 
 export function getToken() {
   return sessionStorage.getItem(TOKEN_KEY);
 }
-export function setToken(token) {
+export function getRole() {
+  return sessionStorage.getItem(ROLE_KEY);
+}
+export function setToken(token, role) {
   sessionStorage.setItem(TOKEN_KEY, token);
+  if (role) {
+    sessionStorage.setItem(ROLE_KEY, role);
+    if (role === 'admin') {
+      document.documentElement.classList.add('is-admin');
+    } else {
+      document.documentElement.classList.remove('is-admin');
+    }
+  }
 }
 export function clearToken() {
   sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(ROLE_KEY);
+  document.documentElement.classList.remove('is-admin');
+}
+
+// Immediate synchronous check to prevent layout shifts
+if (getRole() === 'admin') {
+  document.documentElement.classList.add('is-admin');
 }
 
 export class ApiClientError extends Error {
@@ -95,11 +114,23 @@ export async function downloadAuthenticatedFile(path, suggestedFileName) {
 // when they're an admin. Purely a UX nicety — the real authorization
 // boundary is server-side (requireRole on every admin API), never this.
 export async function revealAdminNavIfApplicable() {
+  const link = document.getElementById('nav-admin-link');
+  if (getRole() === 'admin') {
+    document.documentElement.classList.add('is-admin');
+    if (link) link.hidden = false;
+  }
+
   try {
     const result = await api('/api/auth/me');
-    if (result.user.role === 'admin') {
-      const link = document.getElementById('nav-admin-link');
-      if (link) link.hidden = false;
+    if (result.user?.role) {
+      sessionStorage.setItem(ROLE_KEY, result.user.role);
+      if (result.user.role === 'admin') {
+        document.documentElement.classList.add('is-admin');
+        if (link) link.hidden = false;
+      } else {
+        document.documentElement.classList.remove('is-admin');
+        if (link) link.hidden = true;
+      }
     }
     return result.user;
   } catch {

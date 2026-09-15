@@ -50,7 +50,24 @@ async function main() {
   server.listen(env.port, () => {
     console.log(`V-ACCESS server listening on http://localhost:${env.port} (${env.nodeEnv})`);
   });
+
+  // Keep-alive ping for serverless Postgres providers (e.g. Neon)
+  setInterval(async () => {
+    try {
+      const db = await getDb();
+      await db.prepare('SELECT 1').get();
+    } catch {}
+  }, 90 * 1000).unref();
 }
+
+process.on('uncaughtException', (err) => {
+  if (err?.code === '57P01' || err?.message?.includes('Connection terminated') || err?.message?.includes('terminating connection')) {
+    console.warn('Postgres connection reset, server continuing...');
+    return;
+  }
+  console.error('Fatal unhandled error:', err);
+  process.exit(1);
+});
 
 // Only auto-start when run directly (`node app.js`), not when imported by
 // the test suite via buildServer(). pathToFileURL correctly handles

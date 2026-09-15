@@ -47,7 +47,7 @@ form.addEventListener('submit', async (e) => {
   setLoading(true);
   try {
     const result = await api('/api/auth/login', { method: 'POST', body: { email, password } });
-    setToken(result.token);
+    setToken(result.token, result.user?.role);
     window.location.href = '/dashboard.html';
   } catch (err) {
     if (err.field) showFieldError(err.field, err.message);

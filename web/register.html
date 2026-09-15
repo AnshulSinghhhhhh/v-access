@@ -3,47 +3,60 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Create account — V-ACCESS</title>
+<title>Register — V-ACCESS Academic Portal</title>
 <link rel="stylesheet" href="/css/tokens.css" />
 <link rel="stylesheet" href="/css/base.css" />
 <link rel="stylesheet" href="/css/components.css" />
 </head>
 <body>
 <div class="auth-shell">
+  <div class="auth-brand-crest">
+    <span class="auth-brand-crest__logo">V·A</span>
+    <span class="auth-brand-crest__title">V-ACCESS</span>
+  </div>
+
   <main class="auth-card">
-    <span class="auth-card__mark">V·ACCESS</span>
-    <h1>Create your account</h1>
-    <p class="text-muted">Registration is open to VIT students with a valid institute email.</p>
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--sp-3)">
+      <span class="chip chip-venue">New Student Registration</span>
+      <span class="chip chip-slot">Fall 2026</span>
+    </div>
+
+    <h1>Create account</h1>
+    <p class="text-muted">Directly accessible to all VIT students with an active <strong style="color:var(--color-ink)">@vitstudent.ac.in</strong> address.</p>
 
     <div id="alert-region" role="alert"></div>
 
     <form id="register-form" novalidate>
       <div class="field" id="field-fullName">
         <label for="fullName">Full name</label>
-        <input type="text" id="fullName" name="fullName" autocomplete="name" required />
+        <input type="text" id="fullName" name="fullName" autocomplete="name" placeholder="e.g. Arunav Sharma" required />
         <div class="field-error" hidden></div>
       </div>
       <div class="field" id="field-email">
-        <label for="email">VIT email</label>
-        <input type="email" id="email" name="email" autocomplete="email" placeholder="yourname2026@vitstudent.ac.in" required />
-        <div class="hint">Must end in @vitstudent.ac.in</div>
+        <label for="email">Institutional student email</label>
+        <input type="email" id="email" name="email" autocomplete="email" placeholder="first.last2026@vitstudent.ac.in" required />
+        <div class="hint">Must end with @vitstudent.ac.in</div>
         <div class="field-error" hidden></div>
       </div>
       <div class="field" id="field-password">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" autocomplete="new-password" required />
-        <div class="hint">At least 8 characters, with a letter and a number.</div>
+        <input type="password" id="password" name="password" autocomplete="new-password" placeholder="Minimum 8 characters (letters + numbers)" required />
+        <div class="hint">At least 8 characters, containing both letters and numbers.</div>
         <div class="field-error" hidden></div>
       </div>
-      <button type="submit" class="btn btn-primary btn-block" id="submit-btn">
-        <span class="btn-label">Create account</span>
+      <button type="submit" class="btn btn-primary btn-block" id="submit-btn" style="margin-top:var(--sp-2)">
+        <span class="btn-label">Create Student Account</span>
       </button>
     </form>
 
     <div class="auth-card__foot">
-      Already have an account? <a href="/index.html">Log in</a>
+      Already have a verified account? <a href="/index.html" style="font-weight:600">Sign in</a>
     </div>
   </main>
+
+  <footer style="margin-top:var(--sp-5); font-size:var(--text-xs); color:var(--color-ink-muted); text-align:center;">
+    Vellore Institute of Technology &middot; Unified Academic &amp; Schedule Portal
+  </footer>
 </div>
 
 <script type="module" src="/js/register.js"></script>

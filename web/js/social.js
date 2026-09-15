@@ -478,7 +478,7 @@ function renderReportRow(report) {
       ${new Date(report.createdAt).toLocaleString()}
     </div>
     <p class="mt-0"><strong>Reason:</strong> ${escapeHtml(report.reason)}</p>
-    <p class="mt-0" style="border-left: 3px solid var(--color-line); padding-left: var(--sp-3)">${escapeHtml(report.postContent)}</p>
+    <blockquote class="mt-0" style="background: var(--color-paper); border: 1px solid var(--color-line); border-radius: var(--radius-sm); padding: var(--sp-2) var(--sp-3); font-style: normal;">${escapeHtml(report.postContent)}</blockquote>
   `;
 
   if (report.postImageRef) {

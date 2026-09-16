@@ -269,8 +269,6 @@ function renderPost(post) {
     const img = document.createElement('img');
     img.className = 'post-card__image';
     img.alt = 'Post image';
-    img.width = 1;
-    img.height = 1;
     fetchAuthenticatedImageUrl(`/api/social/images/${post.imageRef}`)
       .then((url) => { img.src = url; })
       .catch(() => { img.alt = 'Image failed to load'; });

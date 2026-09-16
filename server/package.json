@@ -1,6 +1,6 @@
 {
   "name": "v-access-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "V-ACCESS backend API — Node.js 22+ built-ins only (node:crypto, node:http) plus the pg client for Postgres.",
   "type": "module",
   "engines": {
